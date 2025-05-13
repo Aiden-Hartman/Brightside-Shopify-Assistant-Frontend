@@ -84,7 +84,7 @@ export const AssistantShell = ({ clientId }: AssistantShellProps) => {
                 console.log(`[AssistantShell] Asking question about product: ${productId}`);
                 const product = products.find(p => p.id === productId);
                 if (product) {
-                  const message = `Tell me more about ${product.title}`;
+                  const message = `Tell me more about ${product.name}`;
                   setPhase('chat');
                   // Only trigger GPT response, do not add message directly
                   sendMessage(message);
