@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageBubble } from './MessageBubble';
 import { TypingIndicator } from './TypingIndicator';
-import type { ChatMessage, Product, ChatResponse } from '../types/assistant';
+import type { ChatMessage, Product, ChatResponse, AssistantPhase } from '../types/assistant';
 import { ChatProductCard } from './ProductCard';
 
 interface ChatWindowProps {
@@ -9,7 +9,7 @@ interface ChatWindowProps {
   sendMessage: (message: string) => void;
   isLoading: boolean;
   products?: Product[];
-  setPhase?: (phase: string) => void;
+  setPhase?: (phase: AssistantPhase) => void;
 }
 
 export const ChatWindow = ({ messages, sendMessage, isLoading, products = [], setPhase }: ChatWindowProps) => {
