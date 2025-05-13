@@ -53,7 +53,7 @@ export async function getGPTResponse(messages: ChatMessage[]): Promise<GPTRespon
       return {
         role: 'assistant',
         content: messageContent,
-        recommend: action?.type === 'recommend_products'
+        recommend: (action as { type?: string })?.type === 'recommend_products'
       };
     } catch (error) {
       console.error('Error calling Groq API:', error);
