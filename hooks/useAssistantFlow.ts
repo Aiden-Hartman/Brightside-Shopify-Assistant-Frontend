@@ -11,12 +11,12 @@ const SESSION_ID = process.env.NEXT_PUBLIC_SESSION_ID || 'test-session-001';
 const MOCK_PRODUCTS: Product[] = [
   {
     id: 'mock1',
-    title: 'Mock Product 1',
+    name: 'Mock Product 1',
     description: 'A fallback product when API fails',
     price: '99.99',
-    formattedPrice: '$99.99',
-    image: 'https://via.placeholder.com/150',
-    link: '#',
+    currency: 'USD',
+    image_url: 'https://via.placeholder.com/150',
+    product_url: '#',
   }
 ];
 
@@ -41,14 +41,15 @@ const initialState: Omit<AssistantState, keyof Omit<AssistantStore, keyof Assist
 };
 
 // Normalization function for product data
-function normalizeProduct(product: any) {
+function normalizeProduct(product: any): Product {
   return {
     id: product.id,
-    title: product.title || product.name || '',
+    name: product.name || product.title || '',
     description: product.description || '',
-    formattedPrice: product.formattedPrice || (product.price && product.currency ? `${product.currency} ${product.price}` : ''),
-    image: product.image || product.image_url || '',
-    link: product.link || product.product_url || '',
+    price: product.price || '',
+    currency: product.currency || '',
+    image_url: product.image_url || product.image || '',
+    product_url: product.product_url || product.link || '',
     category: product.category || '',
     brand: product.brand || '',
     tags: product.tags || [],
@@ -131,8 +132,9 @@ export const useAssistantFlow = create<AssistantStore>((set, get: StoreApi<Assis
       });
       console.log('[AssistantFlow] Received response:', response);
 
+      const validRole = response.role === 'user' || response.role === 'assistant' ? response.role : 'assistant';
       const assistantMessage: ChatMessage = {
-        role: response.role || 'assistant',
+        role: validRole,
         content: response.content,
         timestamp: Date.now(),
       };
