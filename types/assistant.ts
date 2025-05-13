@@ -44,7 +44,7 @@ export type GPTResponse = {
   action?: GPTAction;
 };
 
-export type AssistantPhase = 'quiz' | 'chat' | 'results';
+export type AssistantPhase = 'quiz' | 'chat' | 'results' | 'loading';
 
 export type QuizQuestion = {
   id: string;
