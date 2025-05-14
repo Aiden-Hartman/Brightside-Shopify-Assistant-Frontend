@@ -1,15 +1,15 @@
 import { useEffect, useCallback } from 'react';
 import { QuizStarter } from './QuizStarter';
-import { ChatWindow } from './ChatWindow';
+import ChatWindow from './ChatWindow';
 import { ProductGallery } from './ProductGallery';
 import { useAssistantFlow } from '../hooks/useAssistantFlow';
-import type { AssistantPhase } from '../types/assistant';
+import type { AssistantPhase, ChatMessage, Product } from '../types/assistant';
 
 interface AssistantShellProps {
   clientId?: string;
 }
 
-export const AssistantShell = ({ clientId }: AssistantShellProps) => {
+export const AssistantShell: React.FC<AssistantShellProps> = ({ clientId }) => {
   const {
     phase,
     isLoading,
