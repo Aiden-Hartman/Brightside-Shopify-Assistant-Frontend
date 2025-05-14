@@ -12,7 +12,7 @@ export interface ChatWindowProps {
   setPhase?: (phase: AssistantPhase) => void;
 }
 
-export const ChatWindow: React.FC<ChatWindowProps> = ({ 
+const ChatWindow: React.FC<ChatWindowProps> = ({ 
   messages, 
   sendMessage, 
   isLoading, 
@@ -88,4 +88,6 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
       </form>
     </div>
   );
-}; 
+};
+
+export default ChatWindow; 
